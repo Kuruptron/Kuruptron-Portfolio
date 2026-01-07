@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sachin Prakash Kurup | Video Editor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400;700;800&family=Space+Grotesk:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --cursor-color: #ffffff;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            cursor: crosshair;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* CRT Scanline Effect */
+        .scanlines {
+            background: linear-gradient(to bottom,
+                    rgba(255, 255, 255, 0),
+                    rgba(255, 255, 255, 0) 50%,
+                    rgba(0, 0, 0, 0.2) 50%,
+                    rgba(0, 0, 0, 0.2));
+            background-size: 100% 4px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            z-index: 50;
+            opacity: 0.6;
+        }
+
+        .crt-flicker {
+            animation: flicker 0.15s infinite;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: rgba(18, 16, 16, 0.02);
+            opacity: 0;
+            z-index: 50;
+            pointer-events: none;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 0.02;
+            }
+
+            5% {
+                opacity: 0.05;
+            }
+
+            10% {
+                opacity: 0.02;
+            }
+
+            15% {
+                opacity: 0.06;
+            }
+
+            20% {
+                opacity: 0.02;
+            }
+
+            50% {
+                opacity: 0.02;
+            }
+
+            55% {
+                opacity: 0.05;
+            }
+
+            60% {
+                opacity: 0.02;
+            }
+
+            65% {
+                opacity: 0.04;
+            }
+
+            70% {
+                opacity: 0.02;
+            }
+
+            100% {
+                opacity: 0.02;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Card Hover Glow */
+        .bento-card {
+            transition: all 0.3s ease;
+            border: 1px solid #333333;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-card:hover {
+            border-color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        .bento-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .bento-card:hover::after {
+            opacity: 1;
+        }
+
+        /* Blinking Dot */
+        .blink {
+            animation: blinker 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Utility */
+        .text-stroke {
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
+            color: transparent;
+        }
+    </style>
+    <style>
+        /* Masonry Layout */
+        .masonry-grid {
+            column-count: 1;
+            column-gap: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .masonry-grid {
+                column-count: 2;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .masonry-grid {
+                column-count: 3;
+            }
+        }
+
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.5rem;
+            position: relative;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .masonry-item:hover {
+            border-color: #ffffff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(255, 255, 255, 0.1);
+            z-index: 10;
+        }
+
+        /* Spotlight Effect */
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 1;
+            background: radial-gradient(600px circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 40%);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-white selection:text-black">
+
+    <!-- Preloader -->
+    <div id="preloader" class="fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center font-mono">
+        <div class="text-6xl md:text-8xl font-bold mb-4 animate-pulse">SPK</div>
+        <div id="loader-text" class="text-sm md:text-base text-gray-400">INITIALIZING SYSTEM SEQUENCE...</div>
+        <div class="w-64 h-1 bg-gray-800 mt-4 rounded-full overflow-hidden">
+            <div id="loader-bar" class="h-full bg-white w-0 transition-all duration-300"></div>
+        </div>
+    </div>
+
+    <!-- Parallax Background -->
+    <div id="parallax-bg"
+        class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[25vw] font-bold opacity-10 pointer-events-none select-none whitespace-nowrap z-0 mono transition-transform duration-75 ease-out text-[#1a1a1a]">
+        SPK</div>
+
+    <!-- CRT Effects -->
+    <div class="scanlines"></div>
+    <div class="crt-flicker"></div>
+
+    <!-- Video Editing Aesthetic Elements -->
+    <!-- Spotlight -->
+    <div class="spotlight"></div>
+
+    <!-- Main Container -->
+    <main class="max-w-[1600px] mx-auto p-4 md:p-8 relative z-10">
+
+        <!-- Header -->
+        <header
+            class="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 border-b border-[#333] pb-6 gap-4">
+            <div>
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tighter mb-2">SACHIN PRAKASH KURUP</h1>
+                <p class="mono text-sm text-gray-400 tracking-widest">VISUAL NARRATIVE // EDITOR // DESIGNER</p>
+            </div>
+            <div class="flex flex-col items-end gap-2">
+                <div
+                    class="mono text-5xl font-bold tracking-tighter opacity-20 hover:opacity-100 transition-opacity duration-300">
+                    SPK</div>
+                <div class="flex items-center gap-4 mono text-xs md:text-sm">
+                    <div class="flex items-center gap-2 text-red-500">
+                        <div class="w-2 h-2 bg-red-500 rounded-full blink"></div>
+                        REC
+                    </div>
+                    <div id="timecode" class="text-gray-400">00:00:00:00</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Creative Divider / System Status -->
+        <div class="mb-12 flex items-center gap-4 opacity-50" data-aos="fade-in">
+            <div class="h-[1px] bg-gray-500 flex-grow"></div>
+            <div class="mono text-xs text-gray-300 tracking-widest">SYSTEM OPTIMIZED // READY FOR INPUT</div>
+            <div class="h-[1px] bg-gray-500 flex-grow"></div>
+        </div>
+
+        <!-- About Section (Core Philosophy & Profile) -->
+        <section class="mb-24 grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-20">
+            <div class="md:col-span-7" data-aos="fade-right">
+                <h2 class="mono text-xs text-gray-300 mb-6 border-l border-gray-500 pl-3">01 // PHILOSOPHY</h2>
+                <h3 class="text-3xl md:text-5xl font-medium leading-tight mb-8">
+                    Editing is not just cutting. It's <span class="text-gray-400">rhythm</span>, <span
+                        class="text-gray-400">emotion</span>, and <span class="text-gray-400">pulse</span>.
+                </h3>
+                <p class="text-gray-300 text-lg leading-relaxed max-w-2xl">
+                    I craft visual experiences that resonate. Merging technical precision with artistic intuition to
+                    transform raw footage into compelling narratives. Minimalist approach, maximalist impact.
+                </p>
+            </div>
+            <div class="md:col-span-5 relative group" data-aos="fade-left">
+                <div
+                    class="absolute inset-0 bg-white/5 transform translate-x-4 translate-y-4 border border-gray-800 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2">
+                </div>
+                <img src="sachin.jpg" alt="Sachin Prakash Kurup"
+                    class="relative w-full aspect-[3/4] object-cover grayscale contrast-125 border border-gray-800 group-hover:grayscale-0 transition-all duration-500">
+                <div
+                    class="absolute bottom-4 right-4 mono text-xs bg-black/80 px-2 py-1 border border-gray-800 text-white">
+                    PROFILE_ID: SPK</div>
+            </div>
+        </section>
+
+        <!-- Skills Section (The Arsenal) -->
+        <section class="mb-24" data-aos="fade-up">
+            <h2 class="mono text-base text-white border-l-2 border-white pl-3 font-bold tracking-widest mb-8">01.5 //
+                THE ARSENAL</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Tool 1: Premiere Pro -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-[#9999f8] text-[#9999f8] rounded-lg mono text-xl font-bold group-hover:bg-[#9999f8] group-hover:text-black transition-all duration-300">
+                        Pr</div>
+                    <span class="mono text-xs tracking-widest">PREMIERE PRO</span>
+                </div>
+                <!-- Tool 2: After Effects -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-[#d2a8ff] text-[#d2a8ff] rounded-lg mono text-xl font-bold group-hover:bg-[#d2a8ff] group-hover:text-black transition-all duration-300">
+                        Ae</div>
+                    <span class="mono text-xs tracking-widest">AFTER EFFECTS</span>
+                </div>
+                <!-- Tool 3: DaVinci Resolve -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-blue-400 text-blue-400 rounded-lg mono text-xl font-bold group-hover:bg-blue-400 group-hover:text-black transition-all duration-300">
+                        Da</div>
+                    <span class="mono text-xs tracking-widest">DAVINCI RESOLVE</span>
+                </div>
+                <!-- Tool 4: Canva -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-cyan-400 text-cyan-400 rounded-lg mono text-xl font-bold group-hover:bg-cyan-400 group-hover:text-black transition-all duration-300">
+                        Cn</div>
+                    <span class="mono text-xs tracking-widest">CANVA</span>
+                </div>
+                <!-- Tool 5: Higgsfield -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-white text-white rounded-lg mono text-xl font-bold group-hover:bg-white group-hover:text-black transition-all duration-300">
+                        Hf</div>
+                    <span class="mono text-xs tracking-widest">HIGGSFIELD</span>
+                </div>
+                <!-- Tool 6: Kling AI -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-white text-white rounded-lg mono text-xl font-bold group-hover:bg-white group-hover:text-black transition-all duration-300">
+                        Kl</div>
+                    <span class="mono text-xs tracking-widest">KLING AI</span>
+                </div>
+                <!-- Tool 7: ElevenLabs -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-white text-white rounded-lg mono text-xl font-bold group-hover:bg-white group-hover:text-black transition-all duration-300">
+                        El</div>
+                    <span class="mono text-xs tracking-widest">ELEVENLABS</span>
+                </div>
+                <!-- Tool 8: Generative AI -->
+                <div
+                    class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
+                    <div
+                        class="h-14 w-14 flex items-center justify-center border-2 border-green-400 text-green-400 rounded-lg mono text-xl font-bold group-hover:bg-green-400 group-hover:text-black transition-all duration-300">
+                        Ai</div>
+                    <span class="mono text-xs tracking-widest">GENERATIVE AI</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Arsenal (Marquee) -->
+        <div class="border-y border-[#333] py-4 mb-12 overflow-hidden bg-black/50 backdrop-blur-sm">
+            <div class="marquee-container">
+                <div class="marquee-content mono text-sm md:text-base font-bold tracking-widest text-gray-200">
+                    OPEN FOR COLLABORATION — READY TO EDIT — PREMIERE PRO — AFTER EFFECTS — DAVINCI RESOLVE — CANVA — AI
+                    TOOLS: HIGGSFIELD, KLING, ELEVENLABS — SOUND DESIGN — COLOR GRADING — MOTION GRAPHICS — OPEN FOR
+                    COLLABORATION — READY TO EDIT — PREMIERE PRO — AFTER EFFECTS — DAVINCI RESOLVE — CANVA — AI TOOLS:
+                    HIGGSFIELD, KLING, ELEVENLABS — SOUND DESIGN — COLOR GRADING — MOTION GRAPHICS —
+                </div>
+            </div>
+        </div>
+
+        <!-- Masonry Grid Portfolio -->
+        <section class="mb-20">
+            <div class="flex justify-between items-end mb-6">
+                <h2 class="mono text-base text-white border-l-2 border-white pl-3 font-bold tracking-widest">02 //
+                    SELECTED WORKS</h2>
+                <div class="mono text-xs text-gray-600">[ DATABASE SIZE: 8 ITEMS ]</div>
+            </div>
+
+            <div class="masonry-grid">
+
+                <!-- Video 1 -->
+                <div class="masonry-item group" data-aos="fade-up">
+                    <video
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        muted loop playsinline autoplay>
+                        <source src="video1.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 001</h3>
+                    </div>
+                </div>
+
+                <!-- Poster 1 -->
+                <div class="masonry-item group" data-aos="fade-up" data-aos-delay="100">
+                    <img src="poster1.jpeg" alt="Poster 1"
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="absolute top-4 right-4 mono text-xs bg-black/80 px-2 py-1 border border-gray-800 z-20">
+                        IMG // 001
+                    </div>
+                </div>
+
+                <!-- Video 2 -->
+                <div class="masonry-item group" data-aos="fade-up" data-aos-delay="200">
+                    <video
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        muted loop playsinline autoplay>
+                        <source src="video2.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 002</h3>
+                    </div>
+                </div>
+
+                <!-- Video 3 -->
+                <div class="masonry-item group" data-aos="fade-up">
+                    <video
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        muted loop playsinline autoplay>
+                        <source src="video3.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 003</h3>
+                    </div>
+                </div>
+
+                <!-- Poster 2 -->
+                <div class="masonry-item group" data-aos="fade-up" data-aos-delay="100">
+                    <img src="poster2.jpeg" alt="Poster 2"
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="absolute top-4 right-4 mono text-xs bg-black/80 px-2 py-1 border border-gray-800 z-20">
+                        IMG // 002
+                    </div>
+                </div>
+
+                <!-- Video 4 -->
+                <div class="masonry-item group" data-aos="fade-up" data-aos-delay="200">
+                    <video
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        muted loop playsinline autoplay>
+                        <source src="video4.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 004</h3>
+                    </div>
+                </div>
+
+                <!-- Poster 3 -->
+                <div class="masonry-item group" data-aos="fade-up">
+                    <img src="poster3.jpeg" alt="Poster 3"
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">IMG // 003</h3>
+                    </div>
+                </div>
+
+                <!-- Video 5 -->
+                <div class="masonry-item group" data-aos="fade-up" data-aos-delay="100">
+                    <video
+                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                        muted loop playsinline autoplay>
+                        <source src="video5.mp4" type="video/mp4">
+                    </video>
+                    <div class="absolute bottom-4 left-4 z-20">
+                        <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 005</h3>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="border-t border-[#333] pt-12 pb-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="mono text-xs text-gray-500 mb-6 border-l border-gray-800 pl-3">03 // TRANSMISSION</h2>
+                    <h3 class="text-4xl md:text-5xl font-bold mb-8">LET'S CREATE<br>SOMETHING LEGENDARY.</h3>
+                    <a href="https://wa.me/919743381093"
+                        class="inline-flex items-center gap-3 bg-white text-black px-6 py-3 font-bold hover:bg-gray-200 transition-colors">
+                        <span>CHAT ON WHATSAPP</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="flex flex-col justify-end items-start md:items-end gap-6">
+                    <a href="https://www.instagram.com/sachin_prakashk/"
+                        class="text-2xl hover:text-white text-gray-500 transition-colors hover:translate-x-2 transform duration-300">INSTAGRAM
+                        ↗</a>
+                    <a href="https://www.linkedin.com/in/sachin-prakash-kurup-218b44249/"
+                        class="text-2xl hover:text-white text-gray-500 transition-colors hover:translate-x-2 transform duration-300">LINKEDIN
+                        ↗</a>
+                    <a href="mailto:sachinveyron@gmail.com"
+                        class="text-2xl hover:text-white text-gray-500 transition-colors hover:translate-x-2 transform duration-300">EMAIL
+                        ↗</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="flex justify-between items-center py-6 border-t border-[#333] mono text-xs text-gray-600">
+            <div>© 2024 SACHIN PRAKASH KURUP</div>
+            <div>SYSTEM STATUS: ONLINE</div>
+        </footer>
+
+    </main>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // AOS Init
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // Preloader Logic
+        const loaderText = document.getElementById('loader-text');
+        const loaderBar = document.getElementById('loader-bar');
+        const preloader = document.getElementById('preloader');
+
+        const texts = [
+            'INITIALIZING SYSTEM SEQUENCE...',
+            'LOADING ASSETS...',
+            'ESTABLISHING SECURE CONNECTION...',
+            'ACCESS GRANTED'
+        ];
+
+        let textIndex = 0;
+
+        function updateLoader() {
+            if (textIndex < texts.length) {
+                loaderText.innerText = texts[textIndex];
+                loaderBar.style.width = `${(textIndex + 1) * 25}%`;
+                textIndex++;
+                setTimeout(updateLoader, 800);
+            } else {
+                setTimeout(() => {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 500);
+                }, 500);
+            }
+        }
+
+        window.addEventListener('load', updateLoader);
+
+        // Parallax & Spotlight Effect
+        const spotlight = document.querySelector('.spotlight');
+        const parallaxBg = document.getElementById('parallax-bg');
+
+        document.addEventListener('mousemove', (e) => {
+            const x = e.clientX;
+            const y = e.clientY;
+
+            // Spotlight
+            if (spotlight) {
+                spotlight.style.background = `radial-gradient(600px circle at ${x}px ${y}px, rgba(255,255,255,0.06), transparent 40%)`;
+            }
+
+            // Parallax
+            if (parallaxBg) {
+                const moveX = (window.innerWidth - x * 2) / 100;
+                const moveY = (window.innerHeight - y * 2) / 100;
+                parallaxBg.style.transform = `translate(-50%, -50%) translate(${moveX}px, ${moveY}px)`;
+            }
+        });
+
+        // Timecode Logic
+        function updateTimecode() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            const frames = String(Math.floor(now.getMilliseconds() / 40)).padStart(2, '0');
+
+            document.getElementById('timecode').innerText = `${hours}:${minutes}:${seconds}:${frames}`;
+            requestAnimationFrame(updateTimecode);
+        }
+        updateTimecode();
+
+        // Random Glitch Effect on Title
+        const title = document.querySelector('h1');
+        setInterval(() => {
+            if (Math.random() > 0.95) {
+                title.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
+                setTimeout(() => {
+                    title.style.transform = 'none';
+                }, 50);
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>

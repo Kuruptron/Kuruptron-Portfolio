@@ -42,7 +42,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            pointer-events: none;
+            pointer-events: none !important;
             z-index: 50;
             opacity: 0.6;
         }
@@ -57,7 +57,7 @@
             background: rgba(18, 16, 16, 0.02);
             opacity: 0;
             z-index: 50;
-            pointer-events: none;
+            pointer-events: none !important;
         }
 
         @keyframes flicker {
@@ -240,6 +240,28 @@
             opacity: 1;
             background: radial-gradient(600px circle at 50% 50%, rgba(255, 255, 255, 0.05), transparent 40%);
         }
+
+        /* Sticky Navbar */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .sticky-nav.scrolled {
+            padding: 1rem 2rem;
+            background: rgba(0, 0, 0, 0.9);
+        }
     </style>
 </head>
 
@@ -267,8 +289,24 @@
     <!-- Spotlight -->
     <div class="spotlight"></div>
 
+    <!-- Sticky Navbar -->
+    <nav class="sticky-nav">
+        <div class="mono text-2xl font-bold tracking-tighter hover:text-gray-300 transition-colors cursor-pointer">
+            SPK
+        </div>
+        <a href="Sachin Resume.pdf" download
+            class="mono text-xs border border-white px-4 py-2 hover:bg-white hover:text-black transition-all duration-300 flex items-center gap-2">
+            <span>DOWNLOAD RESUME</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+        </a>
+    </nav>
+
     <!-- Main Container -->
-    <main class="max-w-[1600px] mx-auto p-4 md:p-8 relative z-10">
+    <main class="max-w-[1600px] mx-auto p-4 md:p-8 relative z-10" style="padding-top: 220px;">
 
         <!-- Header -->
         <header
@@ -279,7 +317,7 @@
             </div>
             <div class="flex flex-col items-end gap-2">
                 <div
-                    class="mono text-5xl font-bold tracking-tighter opacity-20 hover:opacity-100 transition-opacity duration-300">
+                    class="mono text-5xl font-bold tracking-tighter text-gray-800 hover:text-white transition-colors duration-300 select-none">
                     SPK</div>
                 <div class="flex items-center gap-4 mono text-xs md:text-sm">
                     <div class="flex items-center gap-2 text-red-500">
@@ -348,8 +386,14 @@
                 <div
                     class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
                     <div
-                        class="h-14 w-14 flex items-center justify-center border-2 border-blue-400 text-blue-400 rounded-lg mono text-xl font-bold group-hover:bg-blue-400 group-hover:text-black transition-all duration-300">
-                        Da</div>
+                        class="h-14 w-14 flex items-center justify-center rounded-lg group-hover:scale-110 transition-all duration-300">
+                        <!-- DaVinci Resolve SVG -->
+                        <svg class="w-10 h-10 fill-current text-blue-400 group-hover:text-white transition-colors"
+                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M17.621 0 5.977.004c-1.37 0-2.756.345-3.762 1.11a4.925 4.925 0 0 0-1.61 2.003C.233 3.93 0 5.02 0 5.951l.012 12.2c.002 1.604.479 3.057 1.461 4.112.984 1.056 2.462 1.683 4.331 1.691L16.856 24c1.26.005 3.095-.036 4.303-.714 1.075-.605 2.025-1.556 2.497-2.984.278-.84.345-2.084.344-3.147l-.021-11.13c-.002-.888-.15-2.023-.547-2.934-.425-.976-1.181-1.815-2.322-2.425C20.353.26 19.123 0 17.622 0zm0 .93c1.378 0 2.538.295 3.04.565.977.523 1.544 1.166 1.889 1.96.315.721.47 1.793.473 2.572l.018 11.13c.002 1.013-.097 2.257-.298 2.86-.396 1.202-1.146 1.946-2.063 2.462-.814.457-2.612.593-3.82.588l-11.05-.044c-1.657-.007-2.832-.534-3.626-1.386-.792-.851-1.212-2.06-1.212-3.485L.999 5.95c0-.829.196-1.827.474-2.437.345-.757.75-1.207 1.365-1.674C3.585 1.27 4.868.97 6.08.97zm-5.66 3.423c-1.976.089-3.204 1.658-3.214 3.29.019 1.443 1.635 3.481 2.884 4.53.12.099.154.109.33.18.062.025.198-.047.327-.135.36-.245.993-.947 1.648-1.738a7.67 7.67 0 0 0 1.031-1.683c.409-.89.261-1.599.235-1.888a3.983 3.983 0 0 0-.99-1.692 3.36 3.36 0 0 0-2.251-.864zm4.172 7.922a10.185 10.185 0 0 0-3.244.61c-.15.058-.26.1-.374.17-.057.036-.11.135-.105.292.017.433.29 1.278.624 2.27.384 1.135 1.066 2.27 1.844 2.74a3.23 3.23 0 0 0 2.53.342c.832-.243 1.595-.868 1.962-1.546.986-1.818.19-3.548-1.121-4.417-.447-.296-1.133-.445-1.89-.46-.074 0-.15-.002-.226-.001zm-8.432.038a6.201 6.201 0 0 0-.752.047c-.596.078-.932.273-1.29.51a3.177 3.177 0 0 0-1.365 1.979c-.075.552-.086 1.053.033 1.507.433 1.389 1.326 2.222 2.847 2.452.636.028 1.37-.063 1.99-.45 1.269-.782 2.08-3.17 2.412-4.742.053-.176.035-.357-.013-.42-.005-.067-.044-.113-.19-.183-.398-.192-1.32-.417-2.375-.6a7.68 7.68 0 0 0-1.297-.1z" />
+                        </svg>
+                    </div>
                     <span class="mono text-xs tracking-widest">DAVINCI RESOLVE</span>
                 </div>
                 <!-- Tool 4: Canva -->
@@ -357,7 +401,7 @@
                     class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
                     <div
                         class="h-14 w-14 flex items-center justify-center border-2 border-cyan-400 text-cyan-400 rounded-lg mono text-xl font-bold group-hover:bg-cyan-400 group-hover:text-black transition-all duration-300">
-                        Cn</div>
+                        Ca</div>
                     <span class="mono text-xs tracking-widest">CANVA</span>
                 </div>
                 <!-- Tool 5: Higgsfield -->
@@ -365,7 +409,10 @@
                     class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
                     <div
                         class="h-14 w-14 flex items-center justify-center border-2 border-white text-white rounded-lg mono text-xl font-bold group-hover:bg-white group-hover:text-black transition-all duration-300">
-                        Hf</div>
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
+                        </svg>
+                    </div>
                     <span class="mono text-xs tracking-widest">HIGGSFIELD</span>
                 </div>
                 <!-- Tool 6: Kling AI -->
@@ -373,15 +420,23 @@
                     class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
                     <div
                         class="h-14 w-14 flex items-center justify-center border-2 border-white text-white rounded-lg mono text-xl font-bold group-hover:bg-white group-hover:text-black transition-all duration-300">
-                        Kl</div>
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path d="M12 2l2.4 7.2h7.6l-6 4.8 2.4 7.2-6-4.8-6 4.8 2.4-7.2-6-4.8h7.6z" />
+                        </svg>
+                    </div>
                     <span class="mono text-xs tracking-widest">KLING AI</span>
                 </div>
                 <!-- Tool 7: ElevenLabs -->
                 <div
                     class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
                     <div
-                        class="h-14 w-14 flex items-center justify-center border-2 border-white text-white rounded-lg mono text-xl font-bold group-hover:bg-white group-hover:text-black transition-all duration-300">
-                        El</div>
+                        class="h-14 w-14 flex items-center justify-center rounded-lg group-hover:scale-110 transition-all duration-300">
+                        <!-- ElevenLabs SVG -->
+                        <svg class="w-10 h-10 fill-current text-white" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4.6035 0v24h4.9317V0zm9.8613 0v24h4.9317V0z" />
+                        </svg>
+                    </div>
                     <span class="mono text-xs tracking-widest">ELEVENLABS</span>
                 </div>
                 <!-- Tool 8: Generative AI -->
@@ -389,7 +444,11 @@
                     class="border border-[#333] p-6 flex flex-col items-center justify-center gap-4 hover:bg-white/5 transition-colors group">
                     <div
                         class="h-14 w-14 flex items-center justify-center border-2 border-green-400 text-green-400 rounded-lg mono text-xl font-bold group-hover:bg-green-400 group-hover:text-black transition-all duration-300">
-                        Ai</div>
+                        <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M20 9l-2-6-6 2 2 6 6-2zm-12 5l-2 6 6-2 2-6-6 2zm1-9l-2 3H4l2 1.5L4 12l3-1 2 3 1.5-2.5L13 12l-1-3 3-1.5-3-1-1-2.5L9 8z" />
+                        </svg>
+                    </div>
                     <span class="mono text-xs tracking-widest">GENERATIVE AI</span>
                 </div>
             </div>
@@ -419,12 +478,46 @@
 
                 <!-- Video 1 -->
                 <div class="masonry-item group" data-aos="fade-up">
-                    <video
-                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                        muted loop playsinline autoplay>
-                        <source src="video1.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-4 left-4 z-20">
+                    <div class="video-container relative group">
+                        <video
+                            class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                            muted loop playsinline autoplay id="video1">
+                            <source src="video1.mp4" type="video/mp4">
+                        </video>
+                        <!-- Custom Controls -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between z-30">
+                            <button onclick="togglePlay('video1')"
+                                class="text-white hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                            <div class="flex gap-4">
+                                <button onclick="toggleMute('video1')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                                    </svg>
+                                </button>
+                                <button onclick="toggleFullscreen('video1')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-16 left-4 z-20 pointer-events-none">
                         <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 001</h3>
                     </div>
                 </div>
@@ -440,24 +533,92 @@
 
                 <!-- Video 2 -->
                 <div class="masonry-item group" data-aos="fade-up" data-aos-delay="200">
-                    <video
-                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                        muted loop playsinline autoplay>
-                        <source src="video2.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-4 left-4 z-20">
+                    <div class="video-container relative group">
+                        <video
+                            class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                            muted loop playsinline autoplay id="video2">
+                            <source src="video2.mp4" type="video/mp4">
+                        </video>
+                        <!-- Custom Controls -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between z-30">
+                            <button onclick="togglePlay('video2')"
+                                class="text-white hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                            <div class="flex gap-4">
+                                <button onclick="toggleMute('video2')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                                    </svg>
+                                </button>
+                                <button onclick="toggleFullscreen('video2')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-16 left-4 z-20 pointer-events-none">
                         <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 002</h3>
                     </div>
                 </div>
 
                 <!-- Video 3 -->
                 <div class="masonry-item group" data-aos="fade-up">
-                    <video
-                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                        muted loop playsinline autoplay>
-                        <source src="video3.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-4 left-4 z-20">
+                    <div class="video-container relative group">
+                        <video
+                            class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                            muted loop playsinline autoplay id="video3">
+                            <source src="video3.mp4" type="video/mp4">
+                        </video>
+                        <!-- Custom Controls -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between z-30">
+                            <button onclick="togglePlay('video3')"
+                                class="text-white hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                            <div class="flex gap-4">
+                                <button onclick="toggleMute('video3')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                                    </svg>
+                                </button>
+                                <button onclick="toggleFullscreen('video3')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-16 left-4 z-20 pointer-events-none">
                         <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 003</h3>
                     </div>
                 </div>
@@ -473,12 +634,46 @@
 
                 <!-- Video 4 -->
                 <div class="masonry-item group" data-aos="fade-up" data-aos-delay="200">
-                    <video
-                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                        muted loop playsinline autoplay>
-                        <source src="video4.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-4 left-4 z-20">
+                    <div class="video-container relative group">
+                        <video
+                            class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                            muted loop playsinline autoplay id="video4">
+                            <source src="video4.mp4" type="video/mp4">
+                        </video>
+                        <!-- Custom Controls -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between z-30">
+                            <button onclick="togglePlay('video4')"
+                                class="text-white hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                            <div class="flex gap-4">
+                                <button onclick="toggleMute('video4')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                                    </svg>
+                                </button>
+                                <button onclick="toggleFullscreen('video4')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-16 left-4 z-20 pointer-events-none">
                         <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 004</h3>
                     </div>
                 </div>
@@ -494,12 +689,46 @@
 
                 <!-- Video 5 -->
                 <div class="masonry-item group" data-aos="fade-up" data-aos-delay="100">
-                    <video
-                        class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                        muted loop playsinline autoplay>
-                        <source src="video5.mp4" type="video/mp4">
-                    </video>
-                    <div class="absolute bottom-4 left-4 z-20">
+                    <div class="video-container relative group">
+                        <video
+                            class="w-full h-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+                            muted loop playsinline autoplay id="video5">
+                            <source src="video5.mp4" type="video/mp4">
+                        </video>
+                        <!-- Custom Controls -->
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black via-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-between z-30">
+                            <button onclick="togglePlay('video5')"
+                                class="text-white hover:text-red-500 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                            </button>
+                            <div class="flex gap-4">
+                                <button onclick="toggleMute('video5')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2" />
+                                    </svg>
+                                </button>
+                                <button onclick="toggleFullscreen('video5')"
+                                    class="text-white hover:text-red-500 transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 4l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute bottom-16 left-4 z-20 pointer-events-none">
                         <h3 class="mono text-sm tracking-widest text-gray-300 bg-black/50 px-2">SEQ // 005</h3>
                     </div>
                 </div>
@@ -508,7 +737,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section class="border-t border-[#333] pt-12 pb-24">
+        <section class="border-t border-[#333] pt-12 pb-24 relative z-[999]">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
                     <h2 class="mono text-xs text-gray-500 mb-6 border-l border-gray-800 pl-3">03 // TRANSMISSION</h2>
@@ -531,7 +760,7 @@
                         class="text-2xl hover:text-white text-gray-500 transition-colors hover:translate-x-2 transform duration-300">LINKEDIN
                         ↗</a>
                     <a href="mailto:sachinveyron@gmail.com"
-                        class="text-2xl hover:text-white text-gray-500 transition-colors hover:translate-x-2 transform duration-300">EMAIL
+                        class="text-2xl hover:text-white text-gray-500 transition-colors hover:translate-x-2 transform duration-300 relative z-[100] inline-block">EMAIL
                         ↗</a>
                 </div>
             </div>
@@ -630,6 +859,49 @@
                 }, 50);
             }
         }, 100);
+
+        // Video Control Logic
+        function togglePlay(id) {
+            const video = document.getElementById(id);
+            if (video.paused) {
+                video.play();
+            } else {
+                video.pause();
+            }
+            updatePlayButton(id, video.paused);
+        }
+
+        function updatePlayButton(id, isPaused) {
+            // In a real app, toggle the icon SVG here
+            // This basic implementation just relies on the user click for now
+        }
+
+        function toggleMute(id) {
+            const video = document.getElementById(id);
+            video.muted = !video.muted;
+            // Update Icon logic would go here
+        }
+
+        function toggleFullscreen(id) {
+            const video = document.getElementById(id);
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) {
+                video.msRequestFullscreen();
+            }
+        }
+
+        // Scroll Effect for Navbar
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('.sticky-nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
     </script>
 </body>
 

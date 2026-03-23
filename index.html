@@ -139,6 +139,20 @@
         #media-modal {
             transition: opacity 0.3s ease;
         }
+
+        /* --- MOBILE OPTIMIZATIONS --- */
+        @media (max-width: 768px) {
+            :root {
+                --shadow-hard: 4px 4px 0px #1a1a1a;
+                --border-width: 2px;
+            }
+        }
+
+        /* Disable custom cursor on touch devices to prevent "ghost" dots */
+        @media (pointer: coarse) {
+            #cursor-dot { display: none !important; }
+            body, .interactive, .brutalist-btn, .brutalist-card, .brutalist-input { cursor: auto !important; }
+        }
     </style>
 </head>
 
@@ -146,10 +160,10 @@
 
     <div id="cursor-dot"></div>
 
-    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center">
-        <div class="text-8xl font-black mb-4 tracking-tighter">SPK</div>
-        <div id="loader-text" class="mono text-sm font-bold">BOOTING_SYSTEM...</div>
-        <div class="w-64 h-8 border-4 border-[#1a1a1a] p-1 mt-4">
+    <div id="preloader" class="fixed inset-0 z-[100] flex flex-col items-center justify-center p-4">
+        <div class="text-6xl md:text-8xl font-black mb-4 tracking-tighter">SPK</div>
+        <div id="loader-text" class="mono text-xs md:text-sm font-bold">BOOTING_SYSTEM...</div>
+        <div class="w-full max-w-[16rem] h-8 border-4 border-[#1a1a1a] p-1 mt-4">
             <div id="loader-bar" class="h-full bg-[#ff66c4] w-0 transition-all duration-300"></div>
         </div>
     </div>
@@ -160,77 +174,77 @@
 
     <div class="spotlight"></div>
 
-    <nav class="sticky top-0 z-50 flex justify-between items-center p-6 bg-white border-b-4 border-[#1a1a1a]">
-        <div class="text-3xl font-black tracking-tighter">SACHIN.DIGITAL</div>
-        <div class="hidden md:flex gap-8 font-bold text-lg">
+    <nav class="sticky top-0 z-50 flex flex-wrap justify-between items-center p-4 md:p-6 bg-white border-b-4 border-[#1a1a1a] gap-4">
+        <div class="text-xl md:text-3xl font-black tracking-tighter">SACHIN.DIGITAL</div>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-8 font-bold text-sm md:text-lg order-last md:order-none w-full md:w-auto">
             <a href="#about" class="interactive hover:text-[#ff66c4]">ABOUT</a>
             <a href="#work" class="interactive hover:text-[#7ba2ff]">WORK</a>
             <a href="#contact" class="interactive hover:text-[#28b49e]">CONTACT</a>
         </div>
-        <a href="Sachin_Resume.video.pdf" download class="brutalist-btn px-6 py-2 interactive">RESUME</a>
+        <a href="Sachin_Resume.video.pdf" download class="brutalist-btn px-4 py-2 text-sm md:text-base interactive">RESUME</a>
     </nav>
 
-    <main class="max-w-[1400px] mx-auto p-6 relative">
+    <main class="max-w-[1400px] mx-auto p-4 md:p-6 relative">
         
-        <header class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center min-height-[80vh] py-20" id="about">
+        <header class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center min-height-[80vh] py-10 md:py-20" id="about">
             <div data-aos="fade-right">
-                <div class="mono mb-4 flex items-center gap-2 font-bold">
+                <div class="mono mb-4 flex items-center gap-2 font-bold text-sm md:text-base">
                     <span class="w-3 h-3 bg-red-600 rounded-full blink"></span>
                     LIVE_FEED // 2026
                 </div>
-                <h1 class="text-7xl md:text-9xl font-black leading-none tracking-tighter mb-6">
+                <h1 class="text-5xl sm:text-7xl md:text-9xl font-black leading-none tracking-tighter mb-6">
                     I DESIGN <br><span class="text-[#7ba2ff]">FOR IMPACT.</span>
                 </h1>
-                <p class="text-2xl font-medium max-w-lg mb-8">
+                <p class="text-lg sm:text-xl md:text-2xl font-medium max-w-lg mb-8">
                     Senior Growth Video Editor & Engineer. Creating high-retention visual narratives through technical precision.
                 </p>
-                <div class="flex gap-4">
-                    <button class="brutalist-btn text-xl px-8 py-4 bg-[#f9d84c] interactive" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">START GROWING</button>
-                    <div id="timecode" class="mono border-4 border-[#1a1a1a] px-4 py-4 bg-white font-bold flex items-center">00:00:00:00</div>
+                <div class="flex flex-wrap gap-4">
+                    <button class="brutalist-btn text-base md:text-xl px-6 md:px-8 py-3 md:py-4 bg-[#f9d84c] interactive" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">START GROWING</button>
+                    <div id="timecode" class="mono border-4 border-[#1a1a1a] px-3 py-3 md:px-4 md:py-4 bg-white font-bold flex items-center text-sm md:text-base">00:00:00:00</div>
                 </div>
             </div>
 
-            <div class="relative" data-aos="zoom-in">
-                <div class="absolute -top-10 -right-10 w-32 h-32 bg-[#28b49e] border-4 border-[#1a1a1a] rounded-full shadow-lg"></div>
-                <div class="absolute -bottom-10 -left-10 w-24 h-24 bg-[#ff66c4] border-4 border-[#1a1a1a] shadow-lg transform rotate-12"></div>
+            <div class="relative mt-8 md:mt-0" data-aos="zoom-in">
+                <div class="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-24 h-24 md:w-32 md:h-32 bg-[#28b49e] border-4 border-[#1a1a1a] rounded-full shadow-lg"></div>
+                <div class="absolute -bottom-6 -left-6 md:-bottom-10 md:-left-10 w-16 h-16 md:w-24 md:h-24 bg-[#ff66c4] border-4 border-[#1a1a1a] shadow-lg transform rotate-12"></div>
                 
-                <div class="brutalist-card overflow-hidden rounded-[40px] aspect-[4/5] relative interactive">
+                <div class="brutalist-card overflow-hidden rounded-[20px] md:rounded-[40px] aspect-[4/5] relative interactive">
                     <img src="sachin.jpg" alt="Sachin" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500">
-                    <div class="absolute bottom-6 left-6 bg-white border-4 border-[#1a1a1a] px-4 py-2 font-black italic shadow-md">
+                    <div class="absolute bottom-4 left-4 md:bottom-6 md:left-6 bg-white border-4 border-[#1a1a1a] px-3 py-1 md:px-4 md:py-2 font-black italic shadow-md text-sm md:text-base">
                         @KURUPTRON
                     </div>
                 </div>
             </div>
         </header>
 
-        <div class="marquee-container -mx-6 mb-20 transform -rotate-1 border-y-4 border-[#1a1a1a]">
-            <div class="marquee-content text-2xl py-2">
+        <div class="marquee-container -mx-4 md:-mx-6 mb-16 md:mb-20 transform -rotate-1 border-y-4 border-[#1a1a1a]">
+            <div class="marquee-content text-xl md:text-2xl py-2">
                 PREMIERE PRO — AFTER EFFECTS — COLOR GRADING — DAVINCI RESOLVE — MOTION GRAPHICS — AI WORKFLOWS — SOUND DESIGN — VISUAL STORYTELLING — 
             </div>
         </div>
 
-        <section id="work" class="py-20">
-            <div class="flex justify-between items-end mb-12">
-                <h2 class="text-6xl font-black italic">SELECTED_WORKS</h2>
-                <span class="mono font-bold">[ DB_SIZE: 08 ]</span>
+        <section id="work" class="py-10 md:py-20">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 md:mb-12 gap-2">
+                <h2 class="text-4xl md:text-6xl font-black italic">SELECTED_WORKS</h2>
+                <span class="mono font-bold text-sm md:text-base">[ DB_SIZE: 08 ]</span>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
                 
                 <div class="brutalist-card portfolio-item interactive group" data-aos="fade-up">
                     <div class="media-brutal bg-[#ff66c4]">
                         <video id="video1" class="w-full h-full object-cover" muted loop autoplay playsinline>
                             <source src="video1.mp4" type="video/mp4">
                         </video>
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                            <button onclick="togglePlay('video1', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">PLAY/PAUSE</button>
-                            <button onclick="toggleMute('video1', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">MUTE</button>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 md:gap-4">
+                            <button onclick="togglePlay('video1', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">PLAY</button>
+                            <button onclick="toggleMute('video1', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">MUTE</button>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Cinematic Sequence 1</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">SEQ_01</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Cinematic Sequence 1</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">SEQ_01</span>
                         </div>
                     </div>
                 </div>
@@ -239,10 +253,10 @@
                     <div class="media-brutal bg-[#7ba2ff]">
                         <img src="poster1.jpeg" alt="Poster 1" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Static Graphic Design</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">IMG_01</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Static Graphic Design</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">IMG_01</span>
                         </div>
                     </div>
                 </div>
@@ -252,15 +266,15 @@
                         <video id="video2" class="w-full h-full object-cover" muted loop autoplay playsinline>
                             <source src="video2.mp4" type="video/mp4">
                         </video>
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                            <button onclick="togglePlay('video2', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">PLAY/PAUSE</button>
-                            <button onclick="toggleMute('video2', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">MUTE</button>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 md:gap-4">
+                            <button onclick="togglePlay('video2', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">PLAY</button>
+                            <button onclick="toggleMute('video2', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">MUTE</button>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Motion Narrative</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">SEQ_02</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Motion Narrative</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">SEQ_02</span>
                         </div>
                     </div>
                 </div>
@@ -270,15 +284,15 @@
                         <video id="video3" class="w-full h-full object-cover" muted loop autoplay playsinline>
                             <source src="video3.mp4" type="video/mp4">
                         </video>
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                            <button onclick="togglePlay('video3', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">PLAY/PAUSE</button>
-                            <button onclick="toggleMute('video3', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">MUTE</button>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 md:gap-4">
+                            <button onclick="togglePlay('video3', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">PLAY</button>
+                            <button onclick="toggleMute('video3', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">MUTE</button>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Growth Edit</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">SEQ_03</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Growth Edit</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">SEQ_03</span>
                         </div>
                     </div>
                 </div>
@@ -287,10 +301,10 @@
                     <div class="media-brutal bg-[#ff66c4]">
                         <img src="poster2.jpeg" alt="Poster 2" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Campaign Visual</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">IMG_02</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Campaign Visual</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">IMG_02</span>
                         </div>
                     </div>
                 </div>
@@ -300,15 +314,15 @@
                         <video id="video4" class="w-full h-full object-cover" muted loop autoplay playsinline>
                             <source src="video4.mp4" type="video/mp4">
                         </video>
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                            <button onclick="togglePlay('video4', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">PLAY/PAUSE</button>
-                            <button onclick="toggleMute('video4', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">MUTE</button>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 md:gap-4">
+                            <button onclick="togglePlay('video4', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">PLAY</button>
+                            <button onclick="toggleMute('video4', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">MUTE</button>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Dynamic Cut</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">SEQ_04</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Dynamic Cut</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">SEQ_04</span>
                         </div>
                     </div>
                 </div>
@@ -318,15 +332,15 @@
                         <video id="video5" class="w-full h-full object-cover" muted loop autoplay playsinline>
                             <source src="video5.mp4" type="video/mp4">
                         </video>
-                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                            <button onclick="togglePlay('video5', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">PLAY/PAUSE</button>
-                            <button onclick="toggleMute('video5', event)" class="brutalist-btn p-3 bg-white hover:bg-gray-200">MUTE</button>
+                        <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 md:gap-4">
+                            <button onclick="togglePlay('video5', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">PLAY</button>
+                            <button onclick="toggleMute('video5', event)" class="brutalist-btn p-2 md:p-3 bg-white hover:bg-gray-200 text-xs md:text-base">MUTE</button>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Sound & Color Flow</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">SEQ_05</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Sound & Color Flow</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">SEQ_05</span>
                         </div>
                     </div>
                 </div>
@@ -335,67 +349,65 @@
                     <div class="media-brutal bg-[#f9d84c]">
                         <img src="poster3.jpeg" alt="Poster 3" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                     </div>
-                    <div class="p-6 flex-grow">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-extrabold uppercase">Brand Concept</h3>
-                            <span class="mono text-xs bg-[#1a1a1a] text-white px-2 py-1">IMG_03</span>
+                    <div class="p-4 md:p-6 flex-grow">
+                        <div class="flex justify-between items-start mb-2 gap-2">
+                            <h3 class="text-lg md:text-xl font-extrabold uppercase leading-tight">Brand Concept</h3>
+                            <span class="mono text-[10px] md:text-xs bg-[#1a1a1a] text-white px-2 py-1 shrink-0">IMG_03</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="brutalist-card p-8 bg-[#7ba2ff] flex flex-col justify-center items-center text-center w-full" data-aos="fade-up" data-aos-delay="200" id="contact">
-                    <div class="text-5xl font-black mb-2 uppercase">Ready to Build?</div>
-                    <p class="text-lg font-bold mb-6 text-black/80">Drop your details below and I'll get back to you.</p>
+                <div class="brutalist-card p-6 md:p-8 bg-[#7ba2ff] flex flex-col justify-center items-center text-center w-full" data-aos="fade-up" data-aos-delay="200" id="contact">
+                    <div class="text-3xl md:text-5xl font-black mb-2 uppercase">Ready to Build?</div>
+                    <p class="text-base md:text-lg font-bold mb-6 text-black/80">Drop your details below and I'll get back to you.</p>
                     
-                    <form id="lead-form" name="submit-to-google-sheet" class="w-full max-w-sm flex flex-col gap-4">
-                        <input type="text" name="Name" placeholder="YOUR NAME" required class="brutalist-input interactive">
-                        <input type="email" name="Email" placeholder="EMAIL ADDRESS" required class="brutalist-input interactive">
-                        <input type="tel" name="Phone" placeholder="CONTACT NUMBER" required class="brutalist-input interactive">
+                    <form id="lead-form" name="submit-to-google-sheet" class="w-full max-w-sm flex flex-col gap-3 md:gap-4">
+                        <input type="text" name="Name" placeholder="YOUR NAME" required class="brutalist-input interactive text-sm md:text-base">
+                        <input type="email" name="Email" placeholder="EMAIL ADDRESS" required class="brutalist-input interactive text-sm md:text-base">
+                        <input type="tel" name="Phone" placeholder="CONTACT NUMBER" required class="brutalist-input interactive text-sm md:text-base">
                         
-                        <button type="submit" id="submit-btn" class="brutalist-btn px-6 py-4 mt-2 bg-white interactive uppercase hover:bg-[#f9d84c] text-xl">
+                        <button type="submit" id="submit-btn" class="brutalist-btn px-4 py-3 md:px-6 md:py-4 mt-2 bg-white interactive uppercase hover:bg-[#f9d84c] text-base md:text-xl">
                             SEND TRANSMISSION
                         </button>
                     </form>
                     
-                    <div id="form-message" class="mt-4 font-black uppercase hidden text-xl"></div>
+                    <div id="form-message" class="mt-4 font-black uppercase hidden text-lg md:text-xl"></div>
                 </div>
 
             </div>
         </section>
 
-        <footer class="mt-20 border-t-8 border-[#1a1a1a] py-12 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div class="text-4xl font-black tracking-tighter uppercase">SACHIN.SPK</div>
-            <div class="flex gap-6">
+        <footer class="mt-12 md:mt-20 border-t-8 border-[#1a1a1a] py-8 md:py-12 flex flex-col md:flex-row justify-between items-center gap-6 text-center">
+            <div class="text-2xl md:text-4xl font-black tracking-tighter uppercase">SACHIN.SPK</div>
+            <div class="flex flex-wrap justify-center gap-4 md:gap-6 text-sm md:text-base">
                 <a href="https://www.instagram.com/sachin_prakashk/" class="interactive font-black border-b-4 border-transparent hover:border-[#ff66c4]">INSTAGRAM</a>
                 <a href="https://www.linkedin.com/in/sachin-prakash-kurup-218b44249/" class="interactive font-black border-b-4 border-transparent hover:border-[#7ba2ff]">LINKEDIN</a>
                 <a href="mailto:sachinveyron@gmail.com" class="interactive font-black border-b-4 border-transparent hover:border-[#28b49e]">EMAIL</a>
             </div>
-            <div class="mono font-bold text-gray-500">© 2026 // ALL_RIGHTS_RESERVED</div>
+            <div class="mono font-bold text-gray-500 text-[10px] md:text-xs">© 2026 // ALL_RIGHTS_RESERVED</div>
         </footer>
     </main>
 
     <div id="media-modal" class="fixed inset-0 z-[5000] hidden items-center justify-center p-4 md:p-12 opacity-0">
         <div class="absolute inset-0 bg-black/80 backdrop-blur-md modal-backdrop interactive"></div>
         
-        <div class="brutalist-card w-full max-w-6xl max-h-[90vh] flex flex-col relative z-10 overflow-hidden shadow-[15px_15px_0px_#f9d84c]">
-            <button id="modal-close" class="absolute top-4 right-4 z-50 brutalist-btn px-4 py-2 bg-[#ff66c4] text-white interactive hover:bg-red-600">CLOSE [X]</button>
+        <div class="brutalist-card w-full max-w-6xl max-h-[85vh] md:max-h-[90vh] flex flex-col relative z-10 overflow-hidden shadow-[8px_8px_0px_#f9d84c] md:shadow-[15px_15px_0px_#f9d84c]">
+            <button id="modal-close" class="absolute top-2 right-2 md:top-4 md:right-4 z-50 brutalist-btn px-2 py-1 md:px-4 md:py-2 bg-[#ff66c4] text-white interactive hover:bg-red-600 text-xs md:text-base">CLOSE [X]</button>
             
-            <div id="modal-media-wrapper" class="w-full flex-grow relative flex items-center justify-center bg-black min-h-[50vh] max-h-[75vh] border-b-4 border-[#1a1a1a]">
+            <div id="modal-media-wrapper" class="w-full flex-grow relative flex items-center justify-center bg-black min-h-[30vh] md:min-h-[50vh] max-h-[60vh] md:max-h-[75vh] border-b-4 border-[#1a1a1a]">
                 </div>
             
-            <div class="p-6 bg-white flex flex-col md:flex-row justify-between items-start md:items-center gap-4 shrink-0">
-                <h3 id="modal-title" class="text-3xl md:text-4xl font-black uppercase">Title</h3>
-                <span id="modal-badge" class="mono text-lg bg-[#1a1a1a] text-white px-4 py-2 font-bold">BADGE</span>
+            <div class="p-4 md:p-6 bg-white flex flex-col md:flex-row justify-between items-start md:items-center gap-2 md:gap-4 shrink-0">
+                <h3 id="modal-title" class="text-xl md:text-4xl font-black uppercase leading-tight">Title</h3>
+                <span id="modal-badge" class="mono text-xs md:text-lg bg-[#1a1a1a] text-white px-2 py-1 md:px-4 md:py-2 font-bold">BADGE</span>
             </div>
         </div>
     </div>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS (Scroll Animations)
         AOS.init({ duration: 800, once: true });
 
-        // Global DOM Elements
         const loaderText = document.getElementById('loader-text');
         const loaderBar = document.getElementById('loader-bar');
         const preloader = document.getElementById('preloader');
@@ -403,14 +415,12 @@
         const spotlight = document.querySelector('.spotlight');
         const cursor = document.getElementById('cursor-dot');
         
-        // Modal Elements
         const modal = document.getElementById('media-modal');
         const modalMediaWrapper = document.getElementById('modal-media-wrapper');
         const modalTitle = document.getElementById('modal-title');
         const modalBadge = document.getElementById('modal-badge');
         const modalClose = document.getElementById('modal-close');
 
-        // Preloader Logic
         const texts = ['BOOTING_SYSTEM...', 'LOADING_ASSETS...', 'ENCRYPTING_FEED...', 'READY.'];
         let textIndex = 0;
         function updateLoader() {
@@ -428,7 +438,6 @@
         }
         window.addEventListener('load', updateLoader);
 
-        // Movement Logic (Custom Cursor, Parallax Text, Spotlight)
         document.addEventListener('mousemove', (e) => {
             const x = e.clientX;
             const y = e.clientY;
@@ -446,7 +455,6 @@
             }
         });
 
-        // Add hover states for interactive elements (Updates cursor)
         function attachCursorEvents() {
             document.querySelectorAll('.interactive').forEach(item => {
                 item.removeEventListener('mouseenter', addHover);
@@ -459,7 +467,6 @@
         const removeHover = () => document.body.classList.remove('hover-active');
         attachCursorEvents();
 
-        // Live Timecode in Hero
         function updateTimecode() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -471,9 +478,8 @@
         }
         updateTimecode();
 
-        // Thumbnail Video Play/Pause & Mute Handlers
         function togglePlay(id, event) {
-            if(event) event.stopPropagation(); // Prevent modal from opening
+            if(event) event.stopPropagation();
             const video = document.getElementById(id);
             if(video) video.paused ? video.play() : video.pause();
         }
@@ -484,7 +490,6 @@
             if(video) video.muted = !video.muted;
         }
 
-        // Modal Expand Logic
         document.querySelectorAll('.portfolio-item').forEach(card => {
             card.addEventListener('click', function(e) {
                 const mediaEl = this.querySelector('video, img');
@@ -499,10 +504,10 @@
 
                 if(mediaEl.tagName.toLowerCase() === 'video') {
                     const src = mediaEl.querySelector('source').src;
-                    modalMediaWrapper.innerHTML = `<video class="w-full h-full max-h-[75vh] object-contain border-x-4 border-[#1a1a1a] bg-black" controls autoplay><source src="${src}" type="video/mp4"></video>`;
+                    modalMediaWrapper.innerHTML = `<video class="w-full h-full max-h-[60vh] md:max-h-[75vh] object-contain border-x-4 border-[#1a1a1a] bg-black" controls autoplay><source src="${src}" type="video/mp4"></video>`;
                 } else {
                     const src = mediaEl.src;
-                    modalMediaWrapper.innerHTML = `<img src="${src}" class="w-full h-full max-h-[75vh] object-contain border-x-4 border-[#1a1a1a] bg-black">`;
+                    modalMediaWrapper.innerHTML = `<img src="${src}" class="w-full h-full max-h-[60vh] md:max-h-[75vh] object-contain border-x-4 border-[#1a1a1a] bg-black">`;
                 }
 
                 modalTitle.innerText = titleEl.innerText;
@@ -518,7 +523,6 @@
             });
         });
 
-        // Close Modal Logic
         function closeModal() {
             modal.classList.remove('opacity-100');
             modal.classList.add('opacity-0');
@@ -535,8 +539,6 @@
             if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeModal();
         });
 
-        // --- GOOGLE SHEETS FORM LOGIC ---
-        // Replace this URL with your Google Apps Script Web App URL!
         const scriptURL = 'https://script.google.com/macros/s/AKfycbxkflVk2rwlWnYwMfDEeXlTarC8HfTO0vQc_ZYX9ABcFCQpKMp1KuC8bnCYdgphF0wOtA/exec'; 
         const form = document.forms['submit-to-google-sheet'];
         const msg = document.getElementById('form-message');
@@ -551,7 +553,7 @@
                     msg.innerHTML = "Transmission Received. Talk soon.";
                     msg.classList.remove('hidden', 'text-red-900');
                     msg.classList.add('text-black');
-                    submitBtn.style.display = "none"; // Hide button on success
+                    submitBtn.style.display = "none"; 
                     form.reset();
                 })
                 .catch(error => {
@@ -559,7 +561,6 @@
                     msg.classList.remove('hidden', 'text-black');
                     msg.classList.add('text-red-900');
                     submitBtn.innerText = 'SEND TRANSMISSION';
-                    console.error('Error!', error.message);
                 });
         });
 
